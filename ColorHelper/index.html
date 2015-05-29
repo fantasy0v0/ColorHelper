@@ -4,19 +4,58 @@
 	<META http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>ColorHelper</title>
 	<style>
+	body {
+		margin: 5;
+		padding: 0;
+	}
 	#main {
 		width: 300px;
 		height: 350px;
-		border: solid 1px #999999;
+		border: solid 1px black;
 	}
 	#head {
-		border-bottom: solid 1px #999999;
+		border-bottom: solid 1px black;
+		background-color: lightblue;
+	}
+	#title {
+		float: left;
+	}
+	#topbar
+	{
+		/*子元素的对齐方式*/
+		flow:horizontal;
+		float: right;
+	}
+	#topbar div[type="button"] {
+		margin: 1px;
+		padding: 1px;
+		font-family: marlett;
+		border:1px solid #B0CFD1;
+		/*htmlayout 不支持
+		display: inline-block;*/
+	}
+	#topbar div[type="button"]:hover {
+		color: red;
+	}
+	.clear {
+		clear: both;
 	}
 	</style>
 </head>
 <body>
 	<div id="main">
-		<div id="head">标题</div>
+		<div id="head">
+			<div id="title">
+				<div id="icon"></div>
+				<div id="value">ColorHelper</div>	
+			</div>
+			<div id="topbar">
+				<div id="minimize" type="button">0</div>
+				<div id="maximize" type="button">1</div>
+				<div id="close" type="button" title="Guess what is this button doing?">r</div>
+			</div>
+			<div class="clear"></div>
+		</div>
 		<div id="left">
 			
 		</div>
