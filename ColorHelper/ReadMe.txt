@@ -2,7 +2,11 @@
     WIN32 APPLICATION : ColorHelper Project Overview
 ========================================================================
 
-利用空闲时间学习htmlayout。
+利用空闲时间学习Htmlayout。
+	准备工作：
+		1.到官网下载Htmlayout的SDK文件夹。
+		2.配置环境变量HL_SDK，值为SDK文件夹路径。
+		3.在 工程 - 属性 - 配置属性 - C/C++ - 常规 - 附加包含目录 中添加 $(HL_SDK)\include； 。
 
 index.html
 	程序界面。
