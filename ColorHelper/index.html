@@ -18,7 +18,11 @@
 		background-color: lightblue;
 	}
 	#title {
-		float: left;
+		//float: left;
+		flow:horizontal;
+	}
+	#caption {
+		  outline:3px glow #274749;
 	}
 	#topbar
 	{
@@ -29,16 +33,25 @@
 	#topbar div[type="button"] {
 		margin: 1px;
 		padding: 1px;
+		/*利用字体显示最大框、最小框和关闭框的图标*/
 		font-family: marlett;
-		border:1px solid #B0CFD1;
 		/*htmlayout 不支持
 		display: inline-block;*/
 	}
 	#topbar div[type="button"]:hover {
 		color: red;
 	}
+	#topbar div[type="button"]:active {
+		color: white;
+		background-color:#274749;
+	}
 	.clear {
 		clear: both;
+	}
+	/*提示框样式*/
+	popup[role="tooltip"] /* tooltips */
+	{
+	  font:system;
 	}
 	</style>
 </head>
@@ -47,7 +60,7 @@
 		<div id="head">
 			<div id="title">
 				<div id="icon"></div>
-				<div id="value">ColorHelper</div>	
+				<div id="caption">ColorHelper</div>	
 			</div>
 			<div id="topbar">
 				<div id="minimize" type="button">0</div>
