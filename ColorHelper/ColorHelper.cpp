@@ -15,6 +15,7 @@ TCHAR szWindowClass[MAX_LOADSTRING];			// the main window class name
 ATOM				MyRegisterClass(HINSTANCE hInstance);
 BOOL				InitInstance(HINSTANCE, int);
 LRESULT CALLBACK	WndProc(HWND, UINT, WPARAM, LPARAM);
+LRESULT CALLBACK ChildProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK	About(HWND, UINT, WPARAM, LPARAM);
 
 int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
@@ -76,7 +77,7 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 	wcex.hIcon			= LoadIcon(hInstance, MAKEINTRESOURCE(IDI_COLORHELPER));
 	wcex.hCursor		= LoadCursor(NULL, IDC_ARROW);
 	wcex.hbrBackground	= (HBRUSH)(COLOR_WINDOW+1);
-	wcex.lpszMenuName	= MAKEINTRESOURCE(IDC_COLORHELPER);
+	wcex.lpszMenuName = 0;//MAKEINTRESOURCE(IDC_COLORHELPER);
 	wcex.lpszClassName	= szWindowClass;
 	wcex.hIconSm		= LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
 
@@ -99,8 +100,8 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    hInst = hInstance; // Store instance handle in our global variable
 
-   hWnd = CreateWindow(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-      CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, NULL, NULL, hInstance, NULL);
+   hWnd = CreateWindow(szWindowClass, szTitle, WS_POPUPWINDOW | WS_CAPTION,
+      0, 0, 600, 800, NULL, NULL, hInstance, NULL);
 
    if (!hWnd)
    {
@@ -110,6 +111,28 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
 
+   WNDCLASSEX wcex;
+
+   wcex.cbSize = sizeof(WNDCLASSEX);
+
+   wcex.style = CS_HREDRAW | CS_VREDRAW;
+   wcex.lpfnWndProc = ChildProc;
+   wcex.cbClsExtra = 0;
+   wcex.cbWndExtra = 0;
+   wcex.hInstance = hInstance;
+   wcex.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_COLORHELPER));
+   wcex.hCursor = LoadCursor(NULL, IDC_HAND);
+   wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 3);
+   wcex.lpszMenuName = 0;//MAKEINTRESOURCE(IDC_COLORHELPER);
+   wcex.lpszClassName = L"child_xf";
+   wcex.hIconSm = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
+
+   RegisterClassEx(&wcex);
+
+   hWnd = CreateWindow(L"child_xf", szTitle, WS_CHILDWINDOW,
+	   0, 0, 300, 400, hWnd, NULL, hInstance, NULL);
+   ShowWindow(hWnd, nCmdShow);
+   UpdateWindow(hWnd);
    return TRUE;
 }
 
@@ -131,26 +154,58 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 	switch (message)
 	{
-	case WM_COMMAND:
-		wmId    = LOWORD(wParam);
-		wmEvent = HIWORD(wParam);
-		// Parse the menu selections:
-		switch (wmId)
-		{
-		case IDM_ABOUT:
-			DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
-			break;
-		case IDM_EXIT:
-			DestroyWindow(hWnd);
-			break;
-		default:
-			return DefWindowProc(hWnd, message, wParam, lParam);
-		}
+	case WM_LBUTTONUP:
+		MessageBox(0, L"text", L"text", 0);
 		break;
 	case WM_PAINT:
 		hdc = BeginPaint(hWnd, &ps);
 		// TODO: Add any drawing code here...
 		EndPaint(hWnd, &ps);
+		break;
+	case WM_DESTROY:
+		PostQuitMessage(0);
+		break;
+	default:
+		return DefWindowProc(hWnd, message, wParam, lParam);
+	}
+	return 0;
+}
+
+//子窗口的回调函数
+LRESULT CALLBACK ChildProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
+	int wmId, wmEvent;
+	PAINTSTRUCT ps;
+	HDC hdc;
+
+	static bool ontop = false;
+	switch (message) {
+	case WM_LBUTTONUP:
+		ReleaseCapture();
+		ontop = false;
+		//InvalidateRect(hWnd, NULL, TRUE);
+		break;
+	case WM_MOUSEMOVE:
+		if (true == ontop) {
+			HDC fullDC = GetDC(NULL);
+			HDC childDC = GetDC(hWnd);
+			//按比例放大像素点
+			//GetPixel
+			BitBlt(childDC, 0, 0, 300, 400, fullDC, 0, 0, SRCCOPY);
+			ReleaseDC(hWnd, childDC);
+			ReleaseDC(NULL, fullDC);
+		}
+		break;
+	case WM_LBUTTONDOWN:
+		SetCapture(hWnd);
+		ontop = true;
+		//InvalidateRect(hWnd, NULL, TRUE);
+		break;
+	case WM_RBUTTONUP:
+		//ReleaseCapture();
+		break;
+	case WM_PAINT:
+		hdc = BeginPaint(hWnd, &ps);
+		// TODO: Add any drawing code here...
 		break;
 	case WM_DESTROY:
 		PostQuitMessage(0);
