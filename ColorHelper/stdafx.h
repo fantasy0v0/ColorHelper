@@ -18,4 +18,8 @@
 #include <tchar.h>
 
 
+
 // TODO: reference additional headers your program requires here
+#include "resource.h"
+#include "htmlayout.h"
+#include "htmlayout_queue.h"

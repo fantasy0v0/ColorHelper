@@ -5,76 +5,108 @@
 	<title>ColorHelper</title>
 	<style>
 	body {
-		margin: 5;
+		margin: 0;
 		padding: 0;
 	}
 	#main {
 		width: 300px;
 		height: 350px;
-		border: solid 1px black;
+		background-color: #f2f2f2;
+		position: relative;
 	}
-	#head {
-		border-bottom: solid 1px black;
-		background-color: lightblue;
-	}
-	#title {
-		//float: left;
+	.head {
 		flow:horizontal;
+		background-color: #15a0f5;
+		color: white;
+		padding: 2px;
+		height: 20px;
+		line-height: 20px;
+	}
+	.footer {
+		position: absolute;
+		bottom: 0;
+		height: 5px;
+		background-color: #15a0f5;
+	}
+	.title {
+		
 	}
 	#caption {
-		  outline:3px glow #274749;
+		//剩余空间的1倍大小
+		width: *;
+		outline:3px glow #ffffff;
 	}
-	#topbar
+	.topbar
 	{
 		/*子元素的对齐方式*/
 		flow:horizontal;
-		float: right;
+		width: 12px;
 	}
-	#topbar div[type="button"] {
+	.topbar > widget[type=button] {
+		color: white;
 		margin: 1px;
 		padding: 1px;
+		width: 10px;
+		height: 10px;
 		/*利用字体显示最大框、最小框和关闭框的图标*/
 		font-family: marlett;
 		/*htmlayout 不支持
 		display: inline-block;*/
+		background-image:none;
+		text-align:center;
 	}
-	#topbar div[type="button"]:hover {
+	.topbar > widget[type=button]:hover {
 		color: red;
 	}
-	#topbar div[type="button"]:active {
+	.topbar > widget[type=button]:active {
 		color: white;
-		background-color:#274749;
 	}
-	.clear {
-		clear: both;
+	.context {
+		margin: 10px 0;
+	}
+	.ColorTool {
+		flow:horizontal;
+	}
+	.ColorTool > div {
+		border: solid 1px black;
+		height: 20px;
+		width: 0.3*;
 	}
 	/*提示框样式*/
 	popup[role="tooltip"] /* tooltips */
 	{
 	  font:system;
+	  background-color: white;
 	}
 	</style>
 </head>
 <body>
 	<div id="main">
-		<div id="head">
-			<div id="title">
-				<div id="icon"></div>
+		<div class="head">
+			<div class="title">
+				<widget id="icon"></widget>
 				<div id="caption">ColorHelper</div>	
 			</div>
-			<div id="topbar">
-				<div id="minimize" type="button">0</div>
-				<div id="maximize" type="button">1</div>
-				<div id="close" type="button" title="Guess what is this button doing?">r</div>
+			<div class="topbar">
+				<!-- <widget id="minimize" type="button">0</widget>
+				<widget id="maximize" type="button">1</widget> -->
+				<widget id="close" type="button" title="Guess what is this button doing?">r</widget>
 			</div>
-			<div class="clear"></div>
 		</div>
-		<div id="left">
-			
+		<div class="context">
+			<div class="ColorTool">
+				<div id="icoFrame">
+					
+				</div>
+				<div id="RGB">
+					
+				</div>
+				<div id="colorHistory">
+					
+				</div>
+			</div>
 		</div>
-		<div id="right">
-			
-		</div>
+		<div class="footer"></div>
 	</div>
 </body>
 </html>
