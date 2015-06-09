@@ -5,6 +5,7 @@
 	<title>ColorHelper</title>
 	<style>
 	body {
+		font-family:'微软雅黑';
 		margin: 0;
 		padding: 0;
 	}
@@ -42,7 +43,7 @@
 		flow:horizontal;
 		width: 12px;
 	}
-	.topbar > widget[type=button] {
+	.topbar widget[type=button] {
 		color: white;
 		margin: 1px;
 		padding: 1px;
@@ -55,10 +56,10 @@
 		background-image:none;
 		text-align:center;
 	}
-	.topbar > widget[type=button]:hover {
+	.topbar widget[type=button]:hover {
 		color: red;
 	}
-	.topbar > widget[type=button]:active {
+	.topbar widget[type=button]:active {
 		color: white;
 	}
 	.context {
@@ -69,8 +70,26 @@
 	}
 	.ColorTool > div {
 		border: solid 1px black;
-		height: 20px;
-		width: 0.3*;
+	}
+	.RGB {
+
+	}
+	.RGB input[type=text]{
+		display: block;
+		text-align: center;
+		padding: 0;
+	}
+	.RGB input[type=text]:empty{
+		text-align: center;
+	}
+	.RGB .first{
+		width: 15px;
+	}
+	#icoFrame {
+		width: 40px;
+		height: 40px;
+		cursor: pointer;
+		behavior: test;
 	}
 	/*提示框样式*/
 	popup[role="tooltip"] /* tooltips */
@@ -88,8 +107,6 @@
 				<div id="caption">ColorHelper</div>	
 			</div>
 			<div class="topbar">
-				<!-- <widget id="minimize" type="button">0</widget>
-				<widget id="maximize" type="button">1</widget> -->
 				<widget id="close" type="button" title="Guess what is this button doing?">r</widget>
 			</div>
 		</div>
@@ -98,12 +115,39 @@
 				<div id="icoFrame">
 					
 				</div>
-				<div id="RGB">
+				<div class="RGB">
+					<table>
+						<tr>
+							<td class="first"><label for="r">R:</label></td>
+							<td><input type="text" filter="0~9" value="0" size=4 maxlength=3 id="r" /></td>
+						</tr>
+						<tr>
+							<td class="first"><label for="g">G:</label></td>
+							<td><input type="text" filter="0~9" value="0" size=4 maxlength=3 id="g" /></td>
+						</tr>
+						<tr>
+							<td class="first"><label for="b">B:</label></td>
+							<td><input type="text" filter="0~9" value= "0" size=4 maxlength=3 id="b" /></td>
+						</tr>
+					</table>
+					<div class="line">
+						
+						
+					</div>
 					
-				</div>
-				<div id="colorHistory">
+					<div class="line">
+						
+						
+					</div>
 					
+					<div class="line">
+						
+						
+					</div>
 				</div>
+				<!--<div id="colorHistory">
+					
+				</div>-->
 			</div>
 		</div>
 		<div class="footer"></div>

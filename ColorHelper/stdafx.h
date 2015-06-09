@@ -23,3 +23,4 @@
 #include "resource.h"
 #include "htmlayout.h"
 #include "htmlayout_queue.h"
+#include "behavior_test.cpp"

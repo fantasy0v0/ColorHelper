@@ -60,5 +60,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="index.html" />
+    <None Include="behavior_test.cpp">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
