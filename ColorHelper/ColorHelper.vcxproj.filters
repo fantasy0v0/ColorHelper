@@ -51,10 +51,13 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="small.ico">
+    <Image Include="1.bmp">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="ColorHelper.ico">
+    <Image Include="pickup.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="pickup.ico">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

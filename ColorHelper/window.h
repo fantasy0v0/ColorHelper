@@ -6,7 +6,7 @@
 
 namespace htmlayout
 {
-
+	
 	class window : public event_handler,
 		public notification_handler<window>
 	{
@@ -46,13 +46,14 @@ namespace htmlayout
 		static  void              self(HWND hWnd, window* inst) { ::SetWindowLongPtr(hWnd, GWLP_USERDATA, LONG_PTR(inst)); }
 
 		static  LRESULT CALLBACK  win_proc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
-		static  LRESULT CALLBACK HTMLayoutNotifyHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, LPVOID vParam);
 
 		static  HINSTANCE         hinstance;
 
-
-
-
+	private:
+		BOOL icoFrame_mouse_move();
+		BOOL icoFrame_mouse_down();
+		BOOL icoFrame_mouse_up();
+		bool isclick = false;
 	};
 
 

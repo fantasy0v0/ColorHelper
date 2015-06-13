@@ -35,7 +35,6 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 		return FALSE;
 	}
 
-	hAccelTable = LoadAccelerators(hInstance, (LPCTSTR)IDC_COLORHELPER);
 
 	// Main message loop:
 	while (GetMessageW(&msg, NULL, 0, 0))
@@ -43,11 +42,8 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 		// execute asynchronous tasks in GUI thread.
 		htmlayout::queue::execute();
 
-		if (!TranslateAcceleratorW(msg.hwnd, hAccelTable, &msg))
-		{
-			TranslateMessage(&msg);
-			DispatchMessageW(&msg);
-		}
+		TranslateMessage(&msg);
+		DispatchMessageW(&msg);
 	}
 
 	return msg.wParam;

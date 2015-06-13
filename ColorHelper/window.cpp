@@ -27,12 +27,12 @@ namespace htmlayout
 		wcex.cbClsExtra = 0;
 		wcex.cbWndExtra = 0;
 		wcex.hInstance = hInstance;
-		wcex.hIcon = LoadIcon(hInstance, (LPCTSTR)IDC_COLORHELPER);
+		wcex.hIcon = LoadIcon(wcex.hInstance, (LPCTSTR)IDI_ICON1);
 		wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
 		wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
 		wcex.lpszMenuName = 0;
 		wcex.lpszClassName = CLASSNAME;
-		wcex.hIconSm = LoadIcon(wcex.hInstance, (LPCTSTR)IDC_MYICON);
+		wcex.hIconSm = LoadIcon(wcex.hInstance, (LPCTSTR)IDI_ICON1);
 
 		return RegisterClassExW(&wcex);
 	}
@@ -169,13 +169,14 @@ namespace htmlayout
 	BOOL window::on_mouse(HELEMENT he, HELEMENT target, UINT event_type, POINT pt, UINT mouseButtons, UINT keyboardStates) { 
 		if (target == icoFrame && event_type == MOUSE_CLICK)
 		{
-			icoFrame.update(true);
 			dc.printf("MOUSE_CLICK\n");
 			return TRUE;
 		}
+		if (target == icoFrame && event_type == MOUSE_MOVE) {
+			return icoFrame_mouse_move();
+		}
 		return FALSE; }
 	BOOL window::on_key(HELEMENT he, HELEMENT target, UINT event_type, UINT code, UINT keyboardStates) {
-		dc.printf("on_key\n");
 		return FALSE; }
 	BOOL window::on_focus(HELEMENT he, HELEMENT target, UINT event_type) {
 		
@@ -183,11 +184,9 @@ namespace htmlayout
 	BOOL window::on_timer(HELEMENT he) { return FALSE; /*stop this timer*/ }
 	BOOL window::on_timer(HELEMENT he, UINT_PTR extTimerId) { return FALSE; /*stop this timer*/ }
 	BOOL window::on_draw(HELEMENT he, UINT draw_type, HDC hdc, const RECT& rc) {
-		dc.printf("on_draw\n");
-		return true; /*do default draw*/ 
+		return FALSE; /*do default draw*/ 
 	}
 	void window::on_size(HELEMENT he) {
-		dc.printf("on_size\n");
 	}
 
 	LRESULT CALLBACK window::win_proc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
@@ -208,9 +207,7 @@ namespace htmlayout
 
 		window* me = self(hwnd);
 
-		switch (message)
-		{
-
+		switch (message) {
 		case WM_NCHITTEST:
 			if (me)
 				return me->hit_test(GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
@@ -244,17 +241,15 @@ namespace htmlayout
 		return DefWindowProcW(hwnd, message, wParam, lParam);
 	}
 
-	LRESULT CALLBACK HTMLayoutNotifyHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, LPVOID vParam){
-		// all HTMLayout notification are comming here.
-		NMHDR*  phdr = (NMHDR*)lParam;
-		switch (phdr->code)
-		{
-		case HLN_LOAD_DATA:     break;//return OnLoadData((LPNMHL_LOAD_DATA)lParam);
-		case HLN_DATA_LOADED:    break;//return OnDataLoaded((LPNMHL_DATA_LOADED)lParam);
-		case HLN_DOCUMENT_LOADED:
-			break; //return OnDocumentComplete();
-		case HLN_ATTACH_BEHAVIOR: break;//return OnAttachBehavior((LPNMHL_ATTACH_BEHAVIOR)lParam);
-		}
-		return 0;
+	BOOL window::icoFrame_mouse_move() {
+		return FALSE;
+	}
+
+	BOOL window::icoFrame_mouse_down() {
+		return FALSE;
+	}
+
+	BOOL window::icoFrame_mouse_up() {
+		return FALSE;
 	}
 }

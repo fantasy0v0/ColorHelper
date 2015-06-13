@@ -4,6 +4,9 @@
 	<META http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>ColorHelper</title>
 	<style>
+	html {
+		
+	}
 	body {
 		font-family:'微软雅黑';
 		margin: 0;
@@ -12,6 +15,7 @@
 	#main {
 		width: 300px;
 		height: 350px;
+		overflow: hidden;
 		background-color: #f2f2f2;
 		position: relative;
 	}
@@ -19,9 +23,8 @@
 		flow:horizontal;
 		background-color: #15a0f5;
 		color: white;
-		padding: 2px;
-		height: 20px;
-		line-height: 20px;
+		height: 18px;
+		padding: 2px 0;
 	}
 	.footer {
 		position: absolute;
@@ -30,23 +33,35 @@
 		background-color: #15a0f5;
 	}
 	.title {
-		
+		flow: horizontal;
+	}
+	#icon {
+		margin: 0 2px;
+		width: 20px;
+		height: 20px;
+	}
+	#icon img {
+		width: 20px;
+		height: 20px;
 	}
 	#caption {
-		//剩余空间的1倍大小
-		width: *;
+		width: 1*;
 		outline:3px glow #ffffff;
+		text-align: left;
 	}
 	.topbar
 	{
 		/*子元素的对齐方式*/
 		flow:horizontal;
-		width: 12px;
+		width: 10px;
+		line-height: 18px;
+		text-align:center;
+		
 	}
 	.topbar widget[type=button] {
 		color: white;
 		margin: 1px;
-		padding: 1px;
+		padding: 0;
 		width: 10px;
 		height: 10px;
 		/*利用字体显示最大框、最小框和关闭框的图标*/
@@ -54,7 +69,6 @@
 		/*htmlayout 不支持
 		display: inline-block;*/
 		background-image:none;
-		text-align:center;
 	}
 	.topbar widget[type=button]:hover {
 		color: red;
@@ -86,10 +100,14 @@
 		width: 15px;
 	}
 	#icoFrame {
+		//background-color: white;
 		width: 40px;
 		height: 40px;
 		cursor: pointer;
 		behavior: test;
+	}
+	#icoFrame:active {
+		cursor: url(pickup.cur);
 	}
 	/*提示框样式*/
 	popup[role="tooltip"] /* tooltips */
@@ -103,11 +121,12 @@
 	<div id="main">
 		<div class="head">
 			<div class="title">
-				<widget id="icon"></widget>
+				<div id="icon"><img src="pickup.png" alt=""></div>
 				<div id="caption">ColorHelper</div>	
-			</div>
-			<div class="topbar">
-				<widget id="close" type="button" title="Guess what is this button doing?">r</widget>
+			<!--</div>-->
+				<div class="topbar">
+					<widget id="close" type="button" title="Guess what is this button doing?">r</widget>
+				</div>
 			</div>
 		</div>
 		<div class="context">
@@ -145,6 +164,7 @@
 						
 					</div>
 				</div>
+				<img src="pickup.ico" alt="">
 				<!--<div id="colorHistory">
 					
 				</div>-->
