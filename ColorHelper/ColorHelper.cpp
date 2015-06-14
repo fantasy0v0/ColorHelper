@@ -1,15 +1,13 @@
 // win32.cpp : Defines the entry point for the application.
 //
 
-#include "stdafx.h"
-
-#include "window.h" 
-
+#include "stdafx.h" 
+#include "ColorHelper.h"
 #define MAX_LOADSTRING 100
 
 // Global Variables:
 HINSTANCE hInst;                // current instance
-TCHAR szWindowClass[] = _T("MySkinnedApp");               // The title bar text
+TCHAR szWindowClass[] = _T("MyColorApp");               // The title bar text
 
 // Foward declarations of functions included in this code module:
 BOOL              InitInstance(HINSTANCE, int);
@@ -22,7 +20,6 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 {
 	// TODO: Place code here.
 	MSG msg;
-	HACCEL hAccelTable;
 
 	//CoInitialize(0); // for Shell Icons
 

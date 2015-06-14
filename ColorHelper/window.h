@@ -1,12 +1,10 @@
 #ifndef __window_h__
 #define __window_h__
 
-#include "htmlayout.h"
-#include <windowsx.h>
+#include "stdafx.h" 
 
 namespace htmlayout
 {
-	
 	class window : public event_handler,
 		public notification_handler<window>
 	{
@@ -15,10 +13,17 @@ namespace htmlayout
 		htmlayout::debug_output_console dc;
 
 		dom::element  body;
+		//标题
 		dom::element  caption;
+		//标题图标
 		dom::element  button_icon;
+		//窗口关闭
 		dom::element  button_close;
-		dom::element  icoFrame;
+		//鼠标框
+		dom::element  curFrame;
+		//颜色框
+		dom::element  colorFrame;
+		dom::element  r, g, b;
 
 		static  window* create(int x, int y, int width, int height, const wchar_t* caption = 0);
 		static  window* self(HWND hWnd) { return (window*)::GetWindowLongPtr(hWnd, GWLP_USERDATA); }
@@ -53,6 +58,7 @@ namespace htmlayout
 		BOOL icoFrame_mouse_move();
 		BOOL icoFrame_mouse_down();
 		BOOL icoFrame_mouse_up();
+		void setRGBElement(COLORREF color);
 		bool isclick = false;
 	};
 

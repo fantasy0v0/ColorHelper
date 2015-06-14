@@ -1,5 +1,4 @@
 #include "stdafx.h"
-#include "window.h"
 
 #ifdef _DEBUG
 htmlayout::debug_output_console _debug_stream;
@@ -66,8 +65,11 @@ namespace htmlayout
 
 			pw->button_icon = r.get_element_by_id("icon");
 			pw->button_close = r.get_element_by_id("close");
-			pw->icoFrame = r.get_element_by_id("icoFrame");
-
+			pw->curFrame = r.get_element_by_id("curFrame");
+			pw->colorFrame = r.get_element_by_id("colorFrame");
+			pw->r = r.get_element_by_id("r");
+			pw->g = r.get_element_by_id("g");
+			pw->b = r.get_element_by_id("b");
 			attach_event_handler(pw->hwnd, pw);
 
 			pw->set_caption(caption);
@@ -165,14 +167,20 @@ namespace htmlayout
 
 		return TRUE;
 	}
-	//he为父元素，target为发生该事件的he下的子元素
+	//target为发生该事件的元素，he为该元素的父元素
 	BOOL window::on_mouse(HELEMENT he, HELEMENT target, UINT event_type, POINT pt, UINT mouseButtons, UINT keyboardStates) { 
-		if (target == icoFrame && event_type == MOUSE_CLICK)
+		if (target == curFrame && event_type == MOUSE_CLICK)
 		{
 			dc.printf("MOUSE_CLICK\n");
 			return TRUE;
 		}
-		if (target == icoFrame && event_type == MOUSE_MOVE) {
+		if (target == curFrame && event_type == MOUSE_DOWN) {
+			return icoFrame_mouse_down();
+		}
+		if (target == curFrame && event_type == MOUSE_UP) {
+			return icoFrame_mouse_up();
+		}
+		if (target == curFrame && event_type == MOUSE_MOVE) {
 			return icoFrame_mouse_move();
 		}
 		return FALSE; }
@@ -241,15 +249,48 @@ namespace htmlayout
 		return DefWindowProcW(hwnd, message, wParam, lParam);
 	}
 
+	//返回true则不将该消息发送给父元素
 	BOOL window::icoFrame_mouse_move() {
-		return FALSE;
+		HDC hdc;
+		COLORREF color;
+		wchar_t colorHex[255];
+		POINT pt;
+		if (isclick) {
+			hdc = GetDC(nullptr);
+			GetCursorPos(&pt);
+			color = GetPixel(hdc, pt.x, pt.y);
+			getColorHex(color, colorHex);
+			colorFrame.set_style_attribute("background-color", colorHex);
+			setRGBElement(color);
+			ReleaseDC(nullptr, hdc);
+		}
+
+		return TRUE;
 	}
 
 	BOOL window::icoFrame_mouse_down() {
-		return FALSE;
+		isclick = true;
+		return TRUE;
 	}
 
 	BOOL window::icoFrame_mouse_up() {
-		return FALSE;
+		isclick = false;
+		return TRUE;
+	}
+	void window::setRGBElement(COLORREF color) {
+		wchar_t tmp[10];
+		int colorNum;
+		// R
+		colorNum = color & 0xff;
+		_itow(colorNum, tmp, 10);
+		r.set_text(tmp);
+		// G
+		colorNum = (color & 0xff00) >> 8;
+		_itow(colorNum, tmp, 10);
+		g.set_text(tmp);
+		// B
+		colorNum = (color & 0xff0000) >> 16;
+		_itow(colorNum, tmp, 10);
+		b.set_text(tmp);
 	}
 }
