@@ -19,9 +19,4 @@
 #include "resource.h"
 #include "htmlayout.h"
 #include "htmlayout_queue.h"
-#include "window.h"
 #include "behavior_test.cpp"
-
-// ¹«ÓÃº¯Êý
-void getColorHex(COLORREF color, wchar_t* buf);
-void makeHex(wchar_t* buf);

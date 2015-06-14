@@ -3,6 +3,7 @@
 
 #include "stdafx.h" 
 #include "ColorHelper.h"
+#include "window.h"
 #define MAX_LOADSTRING 100
 
 // Global Variables:

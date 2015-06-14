@@ -1,8 +1,7 @@
-#include "stdafx.h"
 
-#ifdef _DEBUG
-htmlayout::debug_output_console _debug_stream;
-#endif
+#include "stdafx.h" 
+#include "window.h"
+#include "publicFunction.h"
 
 namespace htmlayout
 {

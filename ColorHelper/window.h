@@ -1,6 +1,4 @@
-#ifndef __window_h__
-#define __window_h__
-
+#pragma once
 #include "stdafx.h" 
 
 namespace htmlayout
@@ -64,5 +62,3 @@ namespace htmlayout
 
 
 }
-
-#endif
