@@ -56,6 +56,7 @@
       <SDLCheck>
       </SDLCheck>
       <AdditionalIncludeDirectories>$(HL_SDK)\include;</AdditionalIncludeDirectories>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -94,14 +95,16 @@
   <ItemGroup>
     <ClCompile Include="ColorHelper.cpp" />
     <ClCompile Include="publicFunction.cpp" />
-    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ColorHelper.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="1.bmp" />
     <Image Include="pickup.bmp" />
     <Image Include="pickup.ico" />
   </ItemGroup>

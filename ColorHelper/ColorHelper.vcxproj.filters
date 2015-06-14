@@ -57,9 +57,6 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="1.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="pickup.bmp">
       <Filter>Resource Files</Filter>
     </Image>

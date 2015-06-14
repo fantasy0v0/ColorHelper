@@ -274,6 +274,7 @@ namespace htmlayout
 
 	BOOL window::icoFrame_mouse_up() {
 		isclick = false;
+		curFrame.update(true);
 		return TRUE;
 	}
 	void window::setRGBElement(COLORREF color) {
