@@ -17,8 +17,8 @@ namespace htmlayout
 		dom::element  button_icon;
 		//窗口关闭
 		dom::element  button_close;
-		//鼠标框
-		dom::element  curFrame;
+		//取色框
+		dom::element  pickupFrame;
 		//颜色框
 		dom::element  colorFrame;
 		dom::element  r, g, b;
@@ -53,9 +53,9 @@ namespace htmlayout
 		static  HINSTANCE         hinstance;
 
 	private:
-		BOOL icoFrame_mouse_move();
-		BOOL icoFrame_mouse_down();
-		BOOL icoFrame_mouse_up();
+		BOOL pickupFrame_mouse_move();
+		BOOL pickupFrame_mouse_down();
+		BOOL pickupFrame_mouse_up();
 		void setRGBElement(COLORREF color);
 		bool isclick = false;
 	};

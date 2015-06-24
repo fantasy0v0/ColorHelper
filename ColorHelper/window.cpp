@@ -45,7 +45,7 @@ namespace htmlayout
 	{
 		window* pw = new window();
 
-		UINT style = WS_POPUP | WS_MAXIMIZEBOX | WS_MINIMIZEBOX | WS_SYSMENU | WS_SIZEBOX;
+		UINT style = WS_POPUP ;
 		pw->hwnd = CreateWindowExW(WS_EX_LAYERED, CLASSNAME, NULL, style,
 			x, y, width, height, NULL, NULL, hinstance, NULL);
 		//    pw->hwnd = CreateWindowExW( 0, CLASSNAME, NULL, style ,
@@ -64,7 +64,7 @@ namespace htmlayout
 
 			pw->button_icon = r.get_element_by_id("icon");
 			pw->button_close = r.get_element_by_id("close");
-			pw->curFrame = r.get_element_by_id("curFrame");
+			pw->pickupFrame = r.get_element_by_id("pickupFrame");
 			pw->colorFrame = r.get_element_by_id("colorFrame");
 			pw->r = r.get_element_by_id("r");
 			pw->g = r.get_element_by_id("g");
@@ -168,19 +168,19 @@ namespace htmlayout
 	}
 	//target为发生该事件的元素，he为该元素的父元素
 	BOOL window::on_mouse(HELEMENT he, HELEMENT target, UINT event_type, POINT pt, UINT mouseButtons, UINT keyboardStates) { 
-		if (target == curFrame && event_type == MOUSE_CLICK)
+		if (target == pickupFrame && event_type == MOUSE_CLICK)
 		{
 			dc.printf("MOUSE_CLICK\n");
 			return TRUE;
 		}
-		if (target == curFrame && event_type == MOUSE_DOWN) {
-			return icoFrame_mouse_down();
+		if (target == pickupFrame && event_type == MOUSE_DOWN) {
+			return pickupFrame_mouse_down();
 		}
-		if (target == curFrame && event_type == MOUSE_UP) {
-			return icoFrame_mouse_up();
+		if (target == pickupFrame && event_type == MOUSE_UP) {
+			return pickupFrame_mouse_up();
 		}
-		if (target == curFrame && event_type == MOUSE_MOVE) {
-			return icoFrame_mouse_move();
+		if (target == pickupFrame && event_type == MOUSE_MOVE) {
+			return pickupFrame_mouse_move();
 		}
 		return FALSE; }
 	BOOL window::on_key(HELEMENT he, HELEMENT target, UINT event_type, UINT code, UINT keyboardStates) {
@@ -249,7 +249,7 @@ namespace htmlayout
 	}
 
 	//返回true则不将该消息发送给父元素
-	BOOL window::icoFrame_mouse_move() {
+	BOOL window::pickupFrame_mouse_move() {
 		HDC hdc;
 		COLORREF color;
 		wchar_t colorHex[255];
@@ -267,14 +267,14 @@ namespace htmlayout
 		return TRUE;
 	}
 
-	BOOL window::icoFrame_mouse_down() {
+	BOOL window::pickupFrame_mouse_down() {
 		isclick = true;
 		return TRUE;
 	}
 
-	BOOL window::icoFrame_mouse_up() {
+	BOOL window::pickupFrame_mouse_up() {
 		isclick = false;
-		curFrame.update(true);
+		pickupFrame.update(true);
 		return TRUE;
 	}
 	void window::setRGBElement(COLORREF color) {

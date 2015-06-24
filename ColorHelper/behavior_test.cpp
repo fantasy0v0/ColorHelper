@@ -1,17 +1,17 @@
 #include "stdafx.h"
 
 namespace htmlayout {
+	//自定义的behavior
 	class test : public behavior {
 	public:
 		test() : behavior(HANDLE_ALL, "test") {
 
 		}
 		htmlayout::debug_output_console dc;
-		dom::element el;
-		bool isclick = false;
+
 		virtual void attached(HELEMENT he)
 		{
-			el = he;
+			
 		}
 
 		virtual void detached(HELEMENT he)
@@ -20,6 +20,9 @@ namespace htmlayout {
 		}
 
 		virtual BOOL on_draw(HELEMENT he, UINT draw_type, HDC hdc, const RECT& rc) {
+			//要被重绘的元素
+			dom::element el = he;
+			//最后要释放的对象
 			HDC hcdc;
 			HBITMAP hbm;
 			HGDIOBJ old_obj;
@@ -27,10 +30,15 @@ namespace htmlayout {
 			RECT rect = rc;
 			//位图信息
 			BITMAP bitmap;
-			if (true == isclick){
+
+			std::wstring str = el.get_attribute("isclick");
+			if (_T("true") == str){
 				return false;
 			}
-			hbm = (HBITMAP)LoadBitmap(GetModuleHandle(NULL), MAKEINTRESOURCE(IDB_BITMAP1));
+			//获得元素的cur属性，来载入相应的位图
+			str = el.get_attribute("cur");
+			int curId = _wtoi(str.c_str());
+			hbm = (HBITMAP)LoadBitmap(GetModuleHandle(NULL), MAKEINTRESOURCE(curId));
 			GetObject(hbm, sizeof(BITMAP), &bitmap);
 			//创建兼容DC
 			hcdc = CreateCompatibleDC(hdc);
@@ -53,7 +61,7 @@ namespace htmlayout {
 				case MOUSE_DOWN:
 					switch (mouseButtons) {
 						case MAIN_MOUSE_BUTTON:
-							mouse_left_down();
+							mouse_left_down(he);
 							break;
 						default:
 							break;
@@ -62,7 +70,7 @@ namespace htmlayout {
 				case MOUSE_UP:
 					switch (mouseButtons) {
 						case MAIN_MOUSE_BUTTON:
-							mouse_left_UP();
+							mouse_left_UP(he);
 							break;
 						default:
 							break;
@@ -75,13 +83,13 @@ namespace htmlayout {
 			return FALSE;
 		}
 	private:
-		void mouse_left_down() {
-			isclick = true;
+		void mouse_left_down(dom::element el) {
+			el.set_attribute("isclick", _T("true"));
 			el.set_capture();
 			el.update(true);
 		}
-		void mouse_left_UP() {
-			isclick = false;
+		void mouse_left_UP(dom::element el) {
+			el.set_attribute("isclick", _T("false"));
 			el.release_capture();
 			el.update(true);
 		}

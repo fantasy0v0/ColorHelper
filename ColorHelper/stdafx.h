@@ -16,6 +16,7 @@
 
 
 // TODO: reference additional headers your program requires here
+#include <string>
 #include "resource.h"
 #include "htmlayout.h"
 #include "htmlayout_queue.h"

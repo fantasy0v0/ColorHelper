@@ -105,6 +105,8 @@
     <ResourceCompile Include="ColorHelper.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="bitmap1.bmp" />
+    <Image Include="magicwand.bmp" />
     <Image Include="pickup.bmp" />
     <Image Include="pickup.ico" />
   </ItemGroup>

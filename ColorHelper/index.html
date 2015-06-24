@@ -77,16 +77,19 @@
 		color: white;
 	}
 	.context {
-		margin: 10px 0;
+		padding: 10px;
+		height: 100%;
+		border-left: solid 1px #b6b6b6;
+		border-right: solid 1px #b6b6b6;
 	}
 	.ColorTool {
 		flow:horizontal;
-	}
-	.ColorTool > div {
-		border: solid 1px black;
+		height: 100px;
 	}
 	.RGB {
 		height: 40px;
+		width: 46px;
+		border: none;
 	}
 	.RGB input[type=text]{
 		display: block;
@@ -99,19 +102,27 @@
 	.RGB .first{
 		width: 15px;
 	}
-	#curFrame {
+	.Frame {
 		//background-color: white;
 		width: 40px;
 		height: 40px;
 		cursor: pointer;
+		border: solid 1px black;
 		behavior: test;
 	}
-	#curFrame:active {
+	#pickupFrame:active {
 		cursor: url(pickup.cur);
 	}
+	#magnifyingFrame:active {
+		cursor: url(magicwand.cur);
+	}
 	#colorFrame {
-		height: 40px;
-		width: 40px;
+		height: 95%;
+		width: 70px;
+		border: solid 1px black;
+	}
+	#rgbHex {
+		width: 100%;	
 	}
 	/*提示框样式*/
 	popup[role="tooltip"] /* tooltips */
@@ -135,14 +146,13 @@
 		</div>
 		<div class="context">
 			<div class="ColorTool">
-				<div id="curFrame">
-					
-				</div>
+				<div id="pickupFrame" class="Frame" isclick="false" cur="133"></div>
 				<div class="RGB">
 					<table>
 						<tr>
 							<td class="first"><label for="r">R:</label></td>
 							<td><input type="text" filter="0~9" value="0" size=4 maxlength=3 id="r" /></td>
+							<td rowspan="3"><div id="colorFrame"></div></td>
 						</tr>
 						<tr>
 							<td class="first"><label for="g">G:</label></td>
@@ -152,10 +162,15 @@
 							<td class="first"><label for="b">B:</label></td>
 							<td><input type="text" filter="0~9" value= "0" size=4 maxlength=3 id="b" /></td>
 						</tr>
+						<tr>
+							<td colspan="2"></td>
+							<td><input type="text" size=1 id="rgbHex" /></td>
+						</tr>
 					</table>
 				</div>
-				<div id="colorFrame"></div>
+				
 			</div>
+			<div id="magnifyingFrame" class="Frame" isclick="false" cur="138"></div>
 		</div>
 		<div class="footer"></div>
 	</div>
