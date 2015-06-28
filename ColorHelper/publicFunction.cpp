@@ -1,7 +1,7 @@
 #include "stdafx.h" 
 #include "publicFunction.h"
 
-//将一个十六进制字符串格式化成6个字符显示 
+//将一个十六进制字符串格式化成7个字符显示 
 // #FFFFFF
 void makeHex(wchar_t* buf) {
 	// 最长6个字符

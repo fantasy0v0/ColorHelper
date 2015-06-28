@@ -83,23 +83,19 @@
 		border-right: solid 1px #b6b6b6;
 	}
 	.ColorTool {
-		flow:horizontal;
-		height: 100px;
-	}
-	.RGB {
 		height: 40px;
 		width: 46px;
 		border: none;
 	}
-	.RGB input[type=text]{
+	.ColorTool input[type=text]{
 		display: block;
 		text-align: center;
 		padding: 0;
 	}
-	.RGB input[type=text]:empty{
+	.ColorTool input[type=text]:empty{
 		text-align: center;
 	}
-	.RGB .first{
+	.ColorTool .first{
 		width: 15px;
 	}
 	.Frame {
@@ -113,16 +109,23 @@
 	#pickupFrame:active {
 		cursor: url(pickup.cur);
 	}
-	#magnifyingFrame:active {
+	#magnifyFrame:active {
 		cursor: url(magicwand.cur);
 	}
 	#colorFrame {
-		height: 95%;
-		width: 70px;
+		height: 57px;
+		width: 72px;
 		border: solid 1px black;
 	}
 	#rgbHex {
 		width: 100%;	
+	}
+	#magnifyScrn {
+		width: 120px;
+		height: 74px;
+		border: solid 1px black;
+		behavior: magnifyScrn;
+		cursor: url(pickup.cur);
 	}
 	/*提示框样式*/
 	popup[role="tooltip"] /* tooltips */
@@ -138,7 +141,6 @@
 			<div class="title">
 				<div id="icon"><img src="pickup.png" alt=""></div>
 				<div id="caption">ColorHelper</div>	
-			<!--</div>-->
 				<div class="topbar">
 					<widget id="close" type="button" title="关闭该程序。">r</widget>
 				</div>
@@ -146,31 +148,59 @@
 		</div>
 		<div class="context">
 			<div class="ColorTool">
-				<div id="pickupFrame" class="Frame" isclick="false" cur="133"></div>
-				<div class="RGB">
-					<table>
-						<tr>
-							<td class="first"><label for="r">R:</label></td>
-							<td><input type="text" filter="0~9" value="0" size=4 maxlength=3 id="r" /></td>
-							<td rowspan="3"><div id="colorFrame"></div></td>
-						</tr>
-						<tr>
-							<td class="first"><label for="g">G:</label></td>
-							<td><input type="text" filter="0~9" value="0" size=4 maxlength=3 id="g" /></td>
-						</tr>
-						<tr>
-							<td class="first"><label for="b">B:</label></td>
-							<td><input type="text" filter="0~9" value= "0" size=4 maxlength=3 id="b" /></td>
-						</tr>
-						<tr>
-							<td colspan="2"></td>
-							<td><input type="text" size=1 id="rgbHex" /></td>
-						</tr>
-					</table>
-				</div>
-				
+				<table style="border:solid 1px black;">
+					<tr>
+						<td rowspan="4" valign="top">
+							<div id="pickupFrame" class="Frame" isclick="false" cur="133"></div>
+						</td>
+						<td class="first">
+							<label for="r">R:</label>
+						</td>
+						<td>
+							<input type="text" filter="0~9" value="0" size=4 maxlength=3 id="r" />
+						</td>
+						<td rowspan="3">
+							<div id="colorFrame"></div>
+						</td>
+					</tr>
+					<tr>
+						<td class="first">
+							<label for="g">G:</label>
+						</td>
+						<td>
+							<input type="text" filter="0~9" value="0" size=4 maxlength=3 id="g" />
+						</td>
+					</tr>
+					<tr>
+						<td class="first">
+							<label for="b">B:</label>
+						</td>
+						<td>
+							<input type="text" filter="0~9" value= "0" size=4 maxlength=3 id="b" />
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2"></td>
+						<td>
+							<input type="text" size=1 id="rgbHex" />
+						</td>
+					</tr>
+					<tr>
+						<!--空一格-->
+						<td colspan="4"></td>
+					</tr>
+					<tr>
+						<td rowspan="4" valign="top">
+							<div id="magnifyFrame" class="Frame" isclick="false" cur="138"></div>
+						</td>
+						<td colspan="3">
+							<div id="magnifyScrn"></div>
+						</td>
+					</tr>
+
+				</table>
 			</div>
-			<div id="magnifyingFrame" class="Frame" isclick="false" cur="138"></div>
+			
 		</div>
 		<div class="footer"></div>
 	</div>

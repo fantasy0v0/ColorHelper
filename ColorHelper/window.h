@@ -22,6 +22,8 @@ namespace htmlayout
 		//颜色框
 		dom::element  colorFrame;
 		dom::element  r, g, b;
+		//显示16进制的颜色值
+		dom::element rgbHex;
 
 		static  window* create(int x, int y, int width, int height, const wchar_t* caption = 0);
 		static  window* self(HWND hWnd) { return (window*)::GetWindowLongPtr(hWnd, GWLP_USERDATA); }

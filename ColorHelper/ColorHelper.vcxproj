@@ -93,6 +93,7 @@
     <ClInclude Include="window.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="behavior_magnifyScrn.cpp" />
     <ClCompile Include="ColorHelper.cpp" />
     <ClCompile Include="publicFunction.cpp" />
     <ClCompile Include="stdafx.cpp">

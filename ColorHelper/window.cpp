@@ -69,6 +69,7 @@ namespace htmlayout
 			pw->r = r.get_element_by_id("r");
 			pw->g = r.get_element_by_id("g");
 			pw->b = r.get_element_by_id("b");
+			pw->rgbHex = r.get_element_by_id("rgbHex");
 			attach_event_handler(pw->hwnd, pw);
 
 			pw->set_caption(caption);
@@ -292,5 +293,9 @@ namespace htmlayout
 		colorNum = (color & 0xff0000) >> 16;
 		_itow(colorNum, tmp, 10);
 		b.set_text(tmp);
+
+		// Hex
+		getColorHex(color, tmp);
+		rgbHex.set_text(tmp);
 	}
 }
