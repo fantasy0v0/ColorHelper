@@ -2,7 +2,9 @@
 #include "stdafx.h" 
 #include "window.h"
 #include "publicFunction.h"
-
+#include "behavior_test.h"
+#include "behavior_manifyScrn.h"
+#include "behavior_test.h"
 namespace htmlayout
 {
 

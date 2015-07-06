@@ -1,4 +1,4 @@
-#include "stdafx.h" 
+#include "stdafx.h"
 #include "publicFunction.h"
 
 //将一个十六进制字符串格式化成7个字符显示 
@@ -26,6 +26,7 @@ void makeHex(wchar_t* buf) {
 	}
 }
 
+//将COLORREF转换成16进制字符串
 void getColorHex(COLORREF color, wchar_t* buf) {
 	int colorNum = 0, R, G, B;
 	R = (color & 0xff) << 16;
@@ -34,4 +35,32 @@ void getColorHex(COLORREF color, wchar_t* buf) {
 	colorNum = R | G | B;
 	_itow(colorNum, buf, 16);
 	makeHex(buf);
+}
+
+//将120px这种字符串转换成数字
+int styleToInt(const wchar_t *strVal) {
+	//最后要返回的值
+	int value = 0;
+	//去掉后面的px
+	int strLen = wcslen(strVal) - 2;
+	//保存截取后的字符串
+	wchar_t tmp[255];
+	wcscpy_s(tmp, 255, strVal);
+	//设置结束符
+	tmp[strLen] = '\0';
+	value = _wtoi(tmp);
+	return value;
+}
+
+//画指定大小的像素点
+void drawPixel(HDC hdc, int x, int y, COLORREF color, int multiple) {
+	int startX = x * multiple;
+	int startY = y * multiple;
+	for (int i = 0; i < multiple; i++)
+	{
+		for (int j = 0; j < multiple; j++)
+		{
+			SetPixel(hdc, startX + j, startY + i, color);
+		}
+	}
 }

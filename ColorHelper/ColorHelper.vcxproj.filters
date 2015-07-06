@@ -36,6 +36,12 @@
     <ClInclude Include="publicFunction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="behavior_manifyScrn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="behavior_test.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ColorHelper.cpp">
@@ -51,6 +57,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="behavior_magnifyScrn.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="behavior_test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -75,8 +84,5 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="index.html" />
-    <None Include="behavior_test.cpp">
-      <Filter>Source Files</Filter>
-    </None>
   </ItemGroup>
 </Project>

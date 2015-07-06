@@ -85,6 +85,8 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="behavior_manifyScrn.h" />
+    <ClInclude Include="behavior_test.h" />
     <ClInclude Include="ColorHelper.h" />
     <ClInclude Include="publicFunction.h" />
     <ClInclude Include="Resource.h" />
@@ -112,7 +114,7 @@
     <Image Include="pickup.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="behavior_test.cpp" />
+    <ClCompile Include="behavior_test.cpp" />
     <None Include="index.html" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
