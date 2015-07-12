@@ -53,13 +53,21 @@ int styleToInt(const wchar_t *strVal) {
 }
 
 //画指定大小的像素点
-void drawPixel(HDC hdc, int x, int y, COLORREF color, int multiple) {
+void drawPixel(HDC hdc, int x, int y, COLORREF color, int multiple, int maxWidth, int maxHeight) {
 	int startX = x * multiple;
 	int startY = y * multiple;
 	for (int i = 0; i < multiple; i++)
 	{
+		//超出最大高度时，返回。
+		if (startY + i >= maxHeight) {
+			return;
+		}
 		for (int j = 0; j < multiple; j++)
 		{
+			//超出最大宽度时，跳出。
+			if (startX + j >= maxWidth) {
+				break;
+			}
 			SetPixel(hdc, startX + j, startY + i, color);
 		}
 	}

@@ -16,5 +16,8 @@ namespace htmlayout {
 
 		virtual BOOL on_draw(HELEMENT he, UINT draw_type, HDC hdc, const RECT& rc);
 		virtual BOOL on_mouse(HELEMENT he, HELEMENT target, UINT event_type, POINT pt, UINT mouseButtons, UINT keyboardStates);
+	private:
+		void mouse_left_down(dom::element el);
+		void mouse_left_UP(dom::element el);
 	};
 }

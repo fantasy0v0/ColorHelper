@@ -13,8 +13,8 @@
 		padding: 0;
 	}
 	#main {
-		width: 300px;
-		height: 350px;
+		//width: 300px;
+		height: 100%;
 		overflow: hidden;
 		background-color: #f2f2f2;
 		position: relative;
@@ -77,7 +77,7 @@
 		color: white;
 	}
 	.context {
-		padding: 10px;
+		padding: 3px;
 		height: 100%;
 		border-left: solid 1px #b6b6b6;
 		border-right: solid 1px #b6b6b6;
@@ -116,6 +116,7 @@
 		height: 57px;
 		width: 72px;
 		border: solid 1px black;
+        background-color: #FFFFFF;
 	}
 	#rgbHex {
 		width: 100%;	
@@ -148,7 +149,7 @@
 		</div>
 		<div class="context">
 			<div class="ColorTool">
-				<table style="border:solid 1px black;">
+				<table>
 					<tr>
 						<td rowspan="4" valign="top">
 							<div id="pickupFrame" class="Frame" isclick="false" cur="133"></div>
@@ -182,7 +183,7 @@
 					<tr>
 						<td colspan="2"></td>
 						<td>
-							<input type="text" size=1 id="rgbHex" />
+                            <input type="text" size=1 id="rgbHex" value="#ffffff" />
 						</td>
 					</tr>
 					<tr>
@@ -194,7 +195,7 @@
 							<div id="magnifyFrame" class="Frame" isclick="false" cur="138"></div>
 						</td>
 						<td colspan="3">
-                            <div id="magnifyScrn" update="false" multiple="4"></div>
+                            <div id="magnifyScrn" isupdate="false" multiple="4"></div>
 						</td>
 					</tr>
 

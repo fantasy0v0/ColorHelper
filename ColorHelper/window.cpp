@@ -72,6 +72,8 @@ namespace htmlayout
 			pw->g = r.get_element_by_id("g");
 			pw->b = r.get_element_by_id("b");
 			pw->rgbHex = r.get_element_by_id("rgbHex");
+			pw->magnifyFrame = r.get_element_by_id("magnifyFrame");
+			pw->magnifyScrn = r.get_element_by_id("magnifyScrn");
 			attach_event_handler(pw->hwnd, pw);
 
 			pw->set_caption(caption);
@@ -185,7 +187,23 @@ namespace htmlayout
 		if (target == pickupFrame && event_type == MOUSE_MOVE) {
 			return pickupFrame_mouse_move();
 		}
-		return FALSE; }
+
+		if (target == magnifyFrame && event_type == MOUSE_DOWN) {
+			return magnifyFrame_mouse_down();
+		}
+		if (target == magnifyFrame && event_type == MOUSE_UP) {
+			return magnifyFrame_mouse_up();
+		}
+		if (target == magnifyFrame && event_type == MOUSE_MOVE) {
+			return magnifyFrame_mouse_move();
+		}
+
+		if (target == magnifyScrn && event_type == MOUSE_CLICK) {
+			return magnifyScrn_mouse_click();
+		}
+
+		return FALSE; 
+	}
 	BOOL window::on_key(HELEMENT he, HELEMENT target, UINT event_type, UINT code, UINT keyboardStates) {
 		return FALSE; }
 	BOOL window::on_focus(HELEMENT he, HELEMENT target, UINT event_type) {
@@ -264,22 +282,62 @@ namespace htmlayout
 			getColorHex(color, colorHex);
 			colorFrame.set_style_attribute("background-color", colorHex);
 			setRGBElement(color);
+			// Õ∑≈
 			ReleaseDC(nullptr, hdc);
+			return TRUE;
 		}
 
-		return TRUE;
+		return FALSE;
 	}
 
 	BOOL window::pickupFrame_mouse_down() {
 		isclick = true;
+		pickupFrame.update(true);
 		return TRUE;
 	}
 
 	BOOL window::pickupFrame_mouse_up() {
 		isclick = false;
-		pickupFrame.update(true);
 		return TRUE;
 	}
+
+	BOOL window::magnifyFrame_mouse_move() {
+		if (isUpdate)
+		{
+			magnifyScrn.update(true);
+			return TRUE;
+		}
+		return FALSE;
+	}
+
+	BOOL window::magnifyFrame_mouse_down() {
+		isUpdate = true;
+		magnifyScrn.set_attribute("isupdate", L"true");
+		return TRUE;
+	}
+
+	BOOL window::magnifyFrame_mouse_up() {
+		isUpdate = false;
+		magnifyScrn.set_attribute("isupdate", L"false");
+		return TRUE;
+	}
+
+	BOOL window::magnifyScrn_mouse_click() {
+		HDC hdc;
+		COLORREF color;
+		wchar_t colorHex[255];
+		POINT pt;
+		hdc = GetDC(nullptr);
+		GetCursorPos(&pt);
+		color = GetPixel(hdc, pt.x, pt.y);
+		getColorHex(color, colorHex);
+		colorFrame.set_style_attribute("background-color", colorHex);
+		setRGBElement(color);
+		// Õ∑≈
+		ReleaseDC(nullptr, hdc);
+		return TRUE;
+	}
+
 	void window::setRGBElement(COLORREF color) {
 		wchar_t tmp[10];
 		int colorNum;

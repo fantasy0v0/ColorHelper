@@ -24,6 +24,9 @@ namespace htmlayout
 		dom::element  r, g, b;
 		//显示16进制的颜色值
 		dom::element rgbHex;
+		//放大框
+		dom::element magnifyFrame;
+		dom::element magnifyScrn;
 
 		static  window* create(int x, int y, int width, int height, const wchar_t* caption = 0);
 		static  window* self(HWND hWnd) { return (window*)::GetWindowLongPtr(hWnd, GWLP_USERDATA); }
@@ -55,11 +58,19 @@ namespace htmlayout
 		static  HINSTANCE         hinstance;
 
 	private:
+		//取色器框的鼠标事件
 		BOOL pickupFrame_mouse_move();
 		BOOL pickupFrame_mouse_down();
 		BOOL pickupFrame_mouse_up();
+		//放大框的鼠标事件
+		BOOL magnifyFrame_mouse_move();
+		BOOL magnifyFrame_mouse_down();
+		BOOL magnifyFrame_mouse_up();
+		//放大框
+		BOOL magnifyScrn_mouse_click();
 		void setRGBElement(COLORREF color);
 		bool isclick = false;
+		bool isUpdate = false;
 	};
 
 

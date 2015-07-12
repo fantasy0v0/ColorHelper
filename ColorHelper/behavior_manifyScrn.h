@@ -7,6 +7,7 @@ namespace htmlayout {
 	//update true表示更新元素的图像为当前鼠标位置的图像，false则使用缓存中的图像
 	//multiple 将图像放大的倍数
 	class magnifyScrn : public behavior {
+	private:
 		htmlayout::debug_output_console dc;
 		int elementWidht;
 		int elementHeight;
@@ -14,8 +15,12 @@ namespace htmlayout {
 		//放大前的图像大小
 		int width;
 		int height;
+		//缓存位图
+		HBITMAP hBitMap;
+		bool iscreate = false;
 	public:
 		magnifyScrn();
+		~magnifyScrn();
 
 		virtual void attached(HELEMENT he);
 		virtual void detached(HELEMENT he);
