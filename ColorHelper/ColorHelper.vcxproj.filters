@@ -81,6 +81,9 @@
     <Image Include="magicwand.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="img.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="index.html" />
