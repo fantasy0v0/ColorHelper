@@ -38,7 +38,6 @@ namespace htmlayout {
 		std::wstring str = el.get_attribute("isupdate");
 		
 		if (L"false" == str){
-			dc.printf("使用缓存画面");
 			HDC cdc = CreateCompatibleDC(hdc);
 			HGDIOBJ oldBitmap = SelectObject(cdc, hBitMap);
 			// +1 是因为边框的原因

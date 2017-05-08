@@ -8,7 +8,6 @@ namespace htmlayout {
 	//multiple 将图像放大的倍数
 	class magnifyScrn : public behavior {
 	private:
-		htmlayout::debug_output_console dc;
 		int elementWidht;
 		int elementHeight;
 		int multiple;
